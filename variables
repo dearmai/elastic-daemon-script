@@ -1,0 +1,3 @@
+ES_PORT=9200
+
+TARGET_NAME=elasticsearch
