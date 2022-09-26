@@ -104,9 +104,17 @@ case $1 in
         ;;
     start)
         if [ -e ${PID_PATH} ]; then
-            print_err "이미 실행 중 입니다."
-            echo "PID_PATH : ${PID_PATH}"
-            exit 1
+            # PID 파일이 있으나 실제 실행중이지 않을 경우 처리
+            if [ -e "/proc/$(get_pid)" ]; then
+                print_err "이미 실행 중 입니다."
+                echo "PID_PATH : ${PID_PATH}"
+                echo "PID : $(get_pid)"
+                exit 1
+            else 
+                # PID 파일 삭제
+                print "PID 파일이 존재 하나 동작중이지 않은 상태로 확인됨(PID : $(get_pid))"
+                rm -f ${PID_PATH}                
+            fi 
         else
             print "Daemon start"
         fi
