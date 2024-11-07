@@ -16,6 +16,7 @@ source ${DIR}/variables
 source ${DIR}/common
 
 
+unset JAVA_HOME
 PID_PATH=${TARGET_PATH}/pid
 PROCESS_KEYWORD="jdk/bin/java"
 
